@@ -34,6 +34,7 @@ const Home = () => {
         </div>
       );
     }
+    return null;
   };
 
   return (
