@@ -12,6 +12,7 @@ export const SearchInput = styled.input`
   font-size: 14px;
   border-radius: 12px;
   color: #8d8d8d;
+
   &::placeholder {
     font-weight: 300;
     color: #8d8d8d;
@@ -22,6 +23,7 @@ export const RadioInputsWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin: 20px 0;
+
   div {
     margin: 0 15px;
   }
@@ -30,6 +32,7 @@ export const RadioInputsWrapper = styled.div`
 export const SearchButtonWrapper = styled.div`
   text-align: center;
   margin-bottom: 35px;
+
   button {
     color: #fff;
     background-color: ${({ theme }) => theme.mainColors.blue};

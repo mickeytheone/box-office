@@ -9,6 +9,7 @@ export const SeasonsWrapper = styled.div`
     font-weight: 700;
   }
 `;
+
 export const SeasonList = styled.div`
   display: flex;
   flex-direction: column;

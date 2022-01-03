@@ -1,31 +1,15 @@
-import React, { useCallback, useState } from 'react';
-import ActorGrid from '../components/actor/ActorGrid';
-import CustomRadio from '../components/CustomRadio';
+import React, { useState } from 'react';
 import MainPageLayout from '../components/MainPageLayout';
-import ShowGrid from '../components/show/ShowGrid';
 import { apiGet } from '../misc/config';
+import ShowGrid from '../components/show/ShowGrid';
+import ActorGrid from '../components/actor/ActorGrid';
 import { useLastQuery } from '../misc/custom-hooks';
 import {
+  SearchInput,
   RadioInputsWrapper,
   SearchButtonWrapper,
-  SearchInput,
 } from './Home.styled';
-
-const renderResults = results => {
-  if (results && results.length === 0) {
-    return <div>No results</div>;
-  }
-
-  if (results && results.length > 0) {
-    return results[0].show ? (
-      <ShowGrid data={results} />
-    ) : (
-      <ActorGrid data={results} />
-    );
-  }
-
-  return null;
-};
+import CustomRadio from '../components/CustomRadio';
 
 const Home = () => {
   const [input, setInput] = useLastQuery();
@@ -33,24 +17,41 @@ const Home = () => {
   const [searchOption, setSearchOption] = useState('shows');
 
   const isShowsSearch = searchOption === 'shows';
-
   const onSearch = () => {
-    apiGet(`search/${searchOption}?q=${input}`).then(result => {
+    apiGet(`/search/${searchOption}?q=${input}`).then(result => {
       setResults(result);
     });
   };
+
   const onInputChange = ev => {
     setInput(ev.target.value);
   };
+
   const onKeyDown = ev => {
     if (ev.keyCode === 13) {
       onSearch();
     }
   };
 
-  const onRadioChange = useCallback(ev => {
+  const onRadioChange = ev => {
     setSearchOption(ev.target.value);
-  }, []);
+  };
+
+  const renderResults = () => {
+    if (results && results.length === 0) {
+      return <div>No results</div>;
+    }
+
+    if (results && results.length > 0) {
+      return results[0].show ? (
+        <ShowGrid data={results} />
+      ) : (
+        <ActorGrid data={results} />
+      );
+    }
+
+    return null;
+  };
 
   return (
     <MainPageLayout>
@@ -61,6 +62,7 @@ const Home = () => {
         onKeyDown={onKeyDown}
         value={input}
       />
+
       <RadioInputsWrapper>
         <div>
           <CustomRadio
@@ -88,7 +90,7 @@ const Home = () => {
           Search
         </button>
       </SearchButtonWrapper>
-      {renderResults(results)}
+      {renderResults()}
     </MainPageLayout>
   );
 };
