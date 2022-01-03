@@ -39,5 +39,5 @@ const Starred = () => {
     </MainPageLayout>
   );
 };
-console.log('hi');
+
 export default Starred;
