@@ -5,7 +5,7 @@ Box-Office
 A movie search app that consumes an external API to display data.
 
 - React
-- Styles with Sass
+- Styles with Styled Components
 
 # Deployment
 
